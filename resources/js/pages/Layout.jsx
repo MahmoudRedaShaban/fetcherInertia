@@ -8,6 +8,7 @@ export default function Layout({children}) {
             <nav className='menu menu-horizontal p-0 font-medium'>
                 <Link className='nav-link' href="/">Home</Link>
                 <Link className='nav-link' href="/about">About</Link>
+                <Link className='nav-link' href="/users">Users</Link>
                 <Link className='nav-link' href="/contact">Contact</Link>
             </nav>
         </header>

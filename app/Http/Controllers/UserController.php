@@ -22,7 +22,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Users/Crerate');
     }
 
     /**
@@ -30,6 +30,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $data = $request->validate([
             'first_name'=> 'required|string|max:255',
             'last_name' => 'required|string|max:255',
@@ -46,7 +48,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return Inertia::render('Users/Show', compact('user'));
     }
 
     /**
@@ -54,7 +56,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return Inertia::render('Users/Edit', compact('user'));
     }
 
     /**
@@ -62,7 +64,14 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $data = $request->validate([
+            'first_name'=> 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+        ]);
+
+        $user->update($request->all());
+        return to_route('users.index');
     }
 
     /**
@@ -70,6 +79,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return  to_route('users.index')->with('status', "Successfully Deleted User!");
     }
 }
